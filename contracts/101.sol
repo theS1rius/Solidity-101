@@ -30,5 +30,28 @@ contract Selector {
 
 contract Remove {
 
-    uint256 number;
+    // Input two numbers to define max size of array and index of deletion.
+    function removeArr(uint8 arraySize, uint8 targetIndex) public pure returns (uint8[] memory result) {
+
+        require (targetIndex < arraySize, "Index is out of bounds.");
+
+        uint8[] memory array = new uint8[](arraySize);
+
+        for (uint8 i = 0; i < arraySize; i++) {
+            array[i] = i + 1;
+        }
+
+        // Create a new array.
+        uint8[] memory newArray = new uint8[](array.length - 1);
+        uint8 newArrayIndex = 0;
+
+        for (uint8 i = 0; i < array.length; i++) {
+            if (i != targetIndex) {
+                newArray[newArrayIndex] = array[i];
+                newArrayIndex++;
+            }
+        }
+
+        return newArray;
+    }
 }
